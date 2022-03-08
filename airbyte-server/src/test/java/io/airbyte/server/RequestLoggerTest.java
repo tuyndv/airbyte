@@ -10,6 +10,7 @@ import io.airbyte.config.helpers.LogClientSingleton;
 import io.airbyte.config.helpers.LogConfigs;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
@@ -103,7 +104,7 @@ public class RequestLoggerTest {
     requestLogger = new RequestLogger(MDC.getCopyOfContextMap(), mServletRequest);
 
     Mockito.when(mRequestContext.getEntityStream())
-        .thenReturn(new ByteArrayInputStream(inputByteBuffer.getBytes()));
+        .thenReturn(new ByteArrayInputStream(inputByteBuffer.getBytes(StandardCharsets.UTF_8)));
 
     Mockito.when(mResponseContext.getStatus())
         .thenReturn(status);
